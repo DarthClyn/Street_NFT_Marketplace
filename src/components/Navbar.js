@@ -74,7 +74,7 @@ async function connectWebsite() {
     return (
       <div className="">
         <nav className="w-screen">
-          <ul className='flex items-end justify-between py-3 bg-transparent text-white pr-5'>
+          <ul className='flex items-end justify-between py-3 bg-transparent text-black pr-5'>
           <li className='flex items-end ml-5 pb-2'>
             <Link to="/">
             <img src={fullLogo} alt="" width={300} height={220} className="inline-block -mt-2"/>
@@ -86,40 +86,40 @@ async function connectWebsite() {
           <li className='w-2/6'>
             <ul className='lg:flex justify-between font-bold mr-10 text-lg'>
               {location.pathname === "/" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
+              <li className='border-b-2 border-black  hover:pb-0 p-2 hover:border-black'>
                 <Link to="/">STREET</Link>
               </li>
               :
-              <li className='hover:border-b-2 hover:pb-0 p-2'>
+              <li className='hover:border-b-2 hover:pb-0 p-2 hover:border-black'>
                 <Link to="/">STREET</Link>
               </li>              
               }
               {location.pathname === "/sellNFT" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
+              <li className='border-b-2 border-black hover:pb-0 p-2 hover:border-black'>
                 <Link to="/sellNFT">List My NFT</Link>
               </li>
               :
-              <li className='hover:border-b-2 hover:pb-0 p-2'>
+              <li className='hover:border-b-2 hover:pb-0 p-2 hover:border-black'>
                 <Link to="/sellNFT">List My NFT</Link>
               </li>              
               }              
               {location.pathname === "/profile" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
+              <li className='border-b-2 border-black hover:pb-0 p-2 hover:border-black'>
                 <Link to="/profile">Profile</Link>
               </li>
               :
-              <li className='hover:border-b-2 hover:pb-0 p-2'>
+              <li className='hover:border-b-2 hover:pb-0 p-2 hover:border-black'>
                 <Link to="/profile">Profile</Link>
               </li>              
               }  
               <li>
-                <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
+                <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
               </li>
             </ul>
           </li>
           </ul>
         </nav>
-        <div className='text-white text-bold text-right mr-10 text-sm'>
+        <div className='text-black text-bold text-right mr-10 text-sm'>
           {currAddress !== "0x" ? "Connected to":"Not Connected. Please login to view NFTs"} {currAddress !== "0x" ? (currAddress.substring(0,15)+'...'):""}
         </div>
       </div>

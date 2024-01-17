@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import NFTTile from "./NFTTile";
 
+import { GetIpfsUrlFromPinata } from "../utils";
 export default function Profile () {
     const [data, updateData] = useState([]);
     const [dataFetched, updateFetched] = useState(false);
@@ -12,6 +13,7 @@ export default function Profile () {
     const [totalPrice, updateTotalPrice] = useState("0");
 
     async function getNFTData(tokenId) {
+        try {
         const ethers = require("ethers");
         let sumPrice = 0;
         //After adding your Hardhat network to your metamask, this code will get providers and signers
@@ -31,7 +33,8 @@ export default function Profile () {
         */
         
         const items = await Promise.all(transaction.map(async i => {
-            const tokenURI = await contract.tokenURI(i.tokenId);
+            var tokenURI = await contract.tokenURI(i.tokenId);
+            tokenURI = GetIpfsUrlFromPinata(tokenURI);
             let meta = await axios.get(tokenURI);
             meta = meta.data;
 
@@ -53,7 +56,12 @@ export default function Profile () {
         updateFetched(true);
         updateAddress(addr);
         updateTotalPrice(sumPrice.toPrecision(3));
+    } catch (error) {
+        console.error("Error fetching NFT data:", error);
+        // Handle the error, e.g., show an error message to the user
     }
+}
+
 
     const params = useParams();
     const tokenId = params.tokenId;
@@ -64,13 +72,13 @@ export default function Profile () {
         <div className="profileClass" style={{"min-height":"100vh"}}>
             <Navbar></Navbar>
             <div className="profileClass">
-            <div className="flex text-center flex-col mt-11 md:text-2xl text-white">
+            <div className="flex text-center flex-col mt-11 md:text-2xl text-">
                 <div className="mb-5">
                     <h2 className="font-bold">Wallet Address</h2>  
                     {address}
                 </div>
             </div>
-            <div className="flex flex-row text-center justify-center mt-10 md:text-2xl text-white">
+            <div className="flex flex-row text-center justify-center mt-10 md:text-2xl text-black">
                     <div>
                         <h2 className="font-bold">No. of NFTs</h2>
                         {data.length}
@@ -80,7 +88,7 @@ export default function Profile () {
                         {totalPrice} ETH
                     </div>
             </div>
-            <div className="flex flex-col text-center items-center mt-11 text-white">
+            <div className="flex flex-col text-center items-center mt-11 text-black">
                 <h2 className="font-bold">Your NFTs</h2>
                 <div className="flex justify-center flex-wrap max-w-screen-xl">
                     {data.map((value, index) => {
