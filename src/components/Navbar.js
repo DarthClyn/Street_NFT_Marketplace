@@ -72,12 +72,12 @@ async function connectWebsite() {
   });
 
     return (
-      <div className="bg-gray-200"> {/* Add your desired background color */}
+      <div className="bg-gray-700"> {/* Add your desired background color */}
         <nav className="w-screen">
           <ul className='flex items-end justify-between py-3 bg-transparent text-black pr-5'>
           <li className='flex items-end ml-5 pb-2'>
             <Link to="/">
-            <img src={fullLogo} alt="" width={300} height={220} className="inline-block -mt-2"/>
+            <img src={fullLogo} alt="" width={300} height={200} className="inline-block -mt-2"/>
             <div className='inline-block font-bold text-xl ml-2'>
               NFT Street
             </div>
