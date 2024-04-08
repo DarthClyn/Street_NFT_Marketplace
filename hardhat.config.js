@@ -18,7 +18,7 @@ module.exports = {
     hardhat: {
       chainId: 80001
     },
-    goerli: {
+   mumbai: {
       url: process.env.REACT_APP_ALCHEMY_API_URL,
       accounts: [ process.env.REACT_APP_PRIVATE_KEY ]
     }
