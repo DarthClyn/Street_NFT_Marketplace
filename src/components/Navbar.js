@@ -72,7 +72,7 @@ async function connectWebsite() {
   });
 
     return (
-      <div className="">
+      <div className="bg-gray-200"> {/* Add your desired background color */}
         <nav className="w-screen">
           <ul className='flex items-end justify-between py-3 bg-transparent text-black pr-5'>
           <li className='flex items-end ml-5 pb-2'>
