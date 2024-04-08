@@ -69,7 +69,7 @@ function Navbar() {
   });
 
   return (
-    <div className="bg-gray-700">
+    <div className="bg-white">
       {" "}
       {/* Add your desired background color */}
       <nav className="w-screen">
