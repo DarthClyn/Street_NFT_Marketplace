@@ -69,77 +69,66 @@ function Navbar() {
   });
 
   return (
-    <div className="bg-white">
-      {" "}
-      {/* Add your desired background color */}
-      <nav className="w-screen">
-        <ul className="flex items-end justify-between py-3 bg-transparent text-black pr-5">
-          <li className="flex items-end ml-5 pb-2">
-            <Link to="/">
-              <img
-                src={fullLogo}
-                alt=""
-                width={300}
-                height={200}
-                className="inline-block -mt-2"
-              />
-              <img
-                src={street}
-                alt=""
-                width={300}
-                height={200}
-                className="inline-block -mt-2"
-              />
+    <nav className="fixed top-0 left-0 w-full z-10">
+      <div className="flex items-center justify-between py-3 pr-5">
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center">
+            <img src={fullLogo} alt="" className="h-12 mr-2" />
+            <img src={street} alt="" className="h-12 ml-2" />
+          </Link>
+        </div>
+        <ul className="flex items-center space-x-4">
+          <li>
+            <Link
+              to="/"
+              className={`${
+                location.pathname === "/" ? "text-black" : "text-gray-500"
+              }`}
+            >
+              STREET
             </Link>
           </li>
-          <li className="w-2/6">
-            <ul className="lg:flex justify-between font-bold mr-10 text-lg">
-              {location.pathname === "/" ? (
-                <li className="border-b-2 border-black  hover:pb-0 p-2 hover:border-black">
-                  <Link to="/">STREET</Link>
-                </li>
-              ) : (
-                <li className="hover:border-b-2 hover:pb-0 p-2 hover:border-black">
-                  <Link to="/">STREET</Link>
-                </li>
-              )}
-              {location.pathname === "/sellNFT" ? (
-                <li className="border-b-2 border-black hover:pb-0 p-2 hover:border-black">
-                  <Link to="/sellNFT">List My NFT</Link>
-                </li>
-              ) : (
-                <li className="hover:border-b-2 hover:pb-0 p-2 hover:border-black">
-                  <Link to="/sellNFT">List My NFT</Link>
-                </li>
-              )}
-              {location.pathname === "/profile" ? (
-                <li className="border-b-2 border-black hover:pb-0 p-2 hover:border-black">
-                  <Link to="/profile">Profile</Link>
-                </li>
-              ) : (
-                <li className="hover:border-b-2 hover:pb-0 p-2 hover:border-black">
-                  <Link to="/profile">Profile</Link>
-                </li>
-              )}
-              <li>
-                <button
-                  className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded text-sm"
-                  onClick={connectWebsite}
-                >
-                  {connected ? "Connected" : "Connect Wallet"}
-                </button>
-              </li>
-            </ul>
+          <li>
+            <Link
+              to="/sellNFT"
+              className={`${
+                location.pathname === "/sellNFT"
+                  ? "text-black"
+                  : "text-gray-500"
+              }`}
+            >
+              List My NFT
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/profile"
+              className={`${
+                location.pathname === "/profile"
+                  ? "text-black"
+                  : "text-gray-500"
+              }`}
+            >
+              Profile
+            </Link>
+          </li>
+          <li>
+            <button
+              className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded text-sm"
+              onClick={connectWebsite}
+            >
+              {connected ? "Connected" : "Connect Wallet"}
+            </button>
           </li>
         </ul>
-      </nav>
+      </div>
       <div className="text-black text-bold text-right mr-10 text-sm">
         {currAddress !== "0x"
           ? "Connected to"
           : "Not Connected. Please login to view NFTs"}{" "}
         {currAddress !== "0x" ? currAddress.substring(0, 15) + "..." : ""}
       </div>
-    </div>
+    </nav>
   );
 }
 
