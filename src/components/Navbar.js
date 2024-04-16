@@ -34,38 +34,41 @@ function Navbar() {
     ethereumButton.classList.add("bg-green-500");
   }
 
-  async function connectWebsite() {
-    const chainId = await window.ethereum.request({ method: "eth_chainId" });
-    if (chainId !== "0x5") {
-      //alert('Incorrect network! Switch your metamask network to Rinkeby');
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x5" }],
+  const connectWebsite = async () => {
+    try {
+      if (!window.ethereum) return "Install Metamask";
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
       });
+      toggleConnect(true);
+      updateAddress(accounts[0]);
+    } catch (error) {
+      return "Something went rogue";
     }
-    await window.ethereum
-      .request({ method: "eth_requestAccounts" })
-      .then(() => {
-        updateButton();
-        console.log("here");
-        getAddress();
-        window.location.replace(location.pathname);
+  };
+
+  const checkIfWalletConnected = async () => {
+    try {
+      if (!window.ethereum) return "Install Metamask";
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
       });
-  }
+
+      if (accounts.length) {
+        toggleConnect(true);
+        updateAddress(accounts[0]);
+      } else {
+        return "No account";
+      }
+    } catch (error) {
+      return "Not Connected";
+    }
+  };
 
   useEffect(() => {
     if (window.ethereum == undefined) return;
-    let val = window.ethereum.isConnected();
-    if (val) {
-      console.log("here");
-      getAddress();
-      toggleConnect(val);
-      updateButton();
-    }
 
-    window.ethereum.on("accountsChanged", function (accounts) {
-      window.location.replace(location.pathname);
-    });
+    checkIfWalletConnected();
   });
 
   return (
